@@ -1,0 +1,17 @@
+micronaut:
+  application:
+    name: micronaut-server
+  server:
+    cors:
+      enabled: true
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger-ui
+        mapping: /swagger-ui/**
+      redoc:
+        paths: classpath:META-INF/redoc
+        mapping: /redoc/**
