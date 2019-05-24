@@ -50,6 +50,7 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine"
     testRuntime "org.jetbrains.spek:spek-junit-platform-engine:1.1.5"
     swaggerUI 'org.webjars:swagger-ui:3.10.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
 }
 
 swaggerSources {
