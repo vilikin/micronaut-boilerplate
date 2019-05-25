@@ -17,6 +17,7 @@ micronaut:
         paths: classpath:META-INF/redoc
         mapping: /redoc/**
 custom:
+  example: value
   server:
     base-path: /api
     secret: ${SECRET}
