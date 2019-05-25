@@ -1,4 +1,4 @@
-package micronaut.server.util
+package micronaut.server
 
 import io.micronaut.context.annotation.ConfigurationProperties
 

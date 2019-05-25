@@ -8,7 +8,7 @@ import io.micronaut.http.client.annotation.Client
 import io.reactivex.Single
 import io.reactivex.rxkotlin.cast
 import io.reactivex.rxkotlin.zipWith
-import micronaut.server.util.HttpError
+import micronaut.server.http.HttpError
 import micronaut.server.util.getLogger
 import javax.inject.Singleton
 

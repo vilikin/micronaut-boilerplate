@@ -56,7 +56,7 @@ dependencies {
 
 swaggerSources {
     api {
-        inputFile = file("$buildDir/tmp/kapt3/classes/main/META-INF/swagger/hello-world-0.0.yml")
+        inputFile = file("$buildDir/tmp/kapt3/classes/main/META-INF/swagger/micronaut-boilerplate-1.0.yml")
         ui {
             outputDir = file("$buildDir/tmp/kapt3/classes/main/META-INF/swagger-ui")
         }
