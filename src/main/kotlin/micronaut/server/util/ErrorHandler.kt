@@ -6,7 +6,7 @@ import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Error
 
-class HttpError(val status: HttpStatus, override val message: String, cause: Throwable) : Throwable(message, cause)
+class HttpError(val status: HttpStatus, override val message: String, cause: Throwable? = null) : Throwable(message, cause)
 
 data class ErrorResponse(
   val details: String,

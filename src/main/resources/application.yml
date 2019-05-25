@@ -2,6 +2,7 @@ micronaut:
   application:
     name: micronaut-server
   server:
+    port: ${PORT}
     cors:
       enabled: true
   router:
@@ -15,3 +16,7 @@ micronaut:
       redoc:
         paths: classpath:META-INF/redoc
         mapping: /redoc/**
+custom:
+  example: value
+  server:
+    secret: ${SECRET}
