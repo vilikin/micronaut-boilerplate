@@ -8,6 +8,8 @@ import io.micronaut.http.client.annotation.Client
 import io.reactivex.Single
 import io.reactivex.rxkotlin.cast
 import io.reactivex.rxkotlin.zipWith
+import micronaut.server.util.HttpError
+import micronaut.server.util.getLogger
 import javax.inject.Singleton
 
 open class Post(
@@ -33,9 +35,13 @@ class PostClient(
   @param:Client("https://jsonplaceholder.typicode.com")
   private val httpClient: RxHttpClient
 ) {
+  private val logger = getLogger<PostClient>()
+
   fun fetchPostsWithComments(): Single<List<PostWithComments>> {
     val postsSingle = fetchPosts()
     val commentsSingle = fetchComments()
+
+    logger.info("I started fetching stuff!")
 
     return postsSingle.zipWith(commentsSingle) { posts, comments ->
       posts.map { post ->
@@ -52,7 +58,7 @@ class PostClient(
       .firstElement()
       .toSingle()
       .onErrorResumeNext { e: Throwable ->
-        println("Error $e")
+        logger.error("Failed to fetch posts", e)
         Single.error(HttpError(HttpStatus.INTERNAL_SERVER_ERROR, "Error while fetching posts", e))
       }
       .cast()
@@ -65,7 +71,7 @@ class PostClient(
       .firstElement()
       .toSingle()
       .onErrorResumeNext { e: Throwable ->
-        println("Error $e")
+        logger.error("Failed to fetch comments", e)
         Single.error(HttpError(HttpStatus.INTERNAL_SERVER_ERROR, "Error while fetching comments", e))
       }
       .cast()

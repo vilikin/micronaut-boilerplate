@@ -1,4 +1,4 @@
-package micronaut.server
+package micronaut.server.util
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
