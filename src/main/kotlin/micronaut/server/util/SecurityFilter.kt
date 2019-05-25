@@ -9,7 +9,7 @@ import io.micronaut.http.filter.ServerFilterChain
 import io.reactivex.rxkotlin.toFlowable
 import org.reactivestreams.Publisher
 
-@Filter("/**")
+@Filter("\${custom.server.base-path:}/**")
 class SecurityFilter(
   val config: Config
 ) : HttpServerFilter {

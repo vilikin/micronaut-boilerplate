@@ -1,22 +1,24 @@
-package micronaut.server
+package micronaut.server.http
 
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.reactivex.Maybe
 import io.reactivex.Single
+import micronaut.server.integrations.PlaceholderClient
+import micronaut.server.integrations.PostWithComments
 
-@Controller("/posts")
-class PostController(
-  private val postClient: PostClient
+@Controller("\${custom.server.base-path:}/posts")
+class Controller(
+  private val placeholderClient: PlaceholderClient
 ) {
   @Get
   fun getPosts(): Single<List<PostWithComments>> {
-    return postClient.fetchPostsWithComments()
+    return placeholderClient.fetchPostsWithComments()
   }
 
   @Get("/{id}")
   fun getPost(id: Int): Maybe<PostWithComments> {
-    return postClient.fetchPostsWithComments()
+    return placeholderClient.fetchPostsWithComments()
       .flattenAsObservable { it }
       .filter { it.id == id }
       .firstElement()

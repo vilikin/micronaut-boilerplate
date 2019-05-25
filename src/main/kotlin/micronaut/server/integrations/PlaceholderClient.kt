@@ -1,4 +1,4 @@
-package micronaut.server
+package micronaut.server.integrations
 
 import io.micronaut.core.type.Argument
 import io.micronaut.http.HttpRequest
@@ -12,30 +12,32 @@ import micronaut.server.util.HttpError
 import micronaut.server.util.getLogger
 import javax.inject.Singleton
 
-open class Post(
+data class Post(
   val id: Int,
   val title: String,
   val body: String
 )
 
-class Comment(
+data class Comment(
   val id: Int,
   val postId: Int,
   val name: String,
   val body: String
 )
 
-class PostWithComments(
-  post: Post,
+data class PostWithComments(
+  val id: Int,
+  val title: String,
+  val body: String,
   val comments: List<Comment>
-) : Post(post.id, post.title, post.body)
+)
 
 @Singleton
-class PostClient(
-  @param:Client("https://jsonplaceholder.typicode.com")
+class PlaceholderClient(
+  @param:Client("\${custom.integrations.placeholder.url}")
   private val httpClient: RxHttpClient
 ) {
-  private val logger = getLogger<PostClient>()
+  private val logger = getLogger<PlaceholderClient>()
 
   fun fetchPostsWithComments(): Single<List<PostWithComments>> {
     val postsSingle = fetchPosts()
@@ -46,7 +48,7 @@ class PostClient(
     return postsSingle.zipWith(commentsSingle) { posts, comments ->
       posts.map { post ->
         val commentsOfPost = comments.filter { it.postId == post.id }
-        PostWithComments(post, commentsOfPost)
+        PostWithComments(post.id, post.title, post.body, commentsOfPost)
       }
     }
   }
