@@ -83,7 +83,7 @@ classes.dependsOn generateReDoc
 test.classpath += configurations.developmentOnly
 
 mainClassName = "micronaut.server.Application"
-// use JUnit 5 platform
+
 test {
     useJUnitPlatform()
 }
@@ -94,10 +94,6 @@ shadowJar {
 
 run.classpath += configurations.developmentOnly
 run.jvmArgs("-noverify", "-XX:TieredStopAtLevel=1", "-Dcom.sun.management.jmxremote")
-
-test {
-    useJUnitPlatform()
-}
 
 allOpen {
 	annotation("io.micronaut.aop.Around")
@@ -119,4 +115,12 @@ compileTestKotlin {
 }
 
 task stage(dependsOn: ["build", "clean"])
+
+// Don't run tests on build (Heroku doesn't like it)
+gradle.taskGraph.whenReady { graph ->
+    if (graph.hasTask(build)) {
+        test.enabled = false
+    }
+}
+
 build.mustRunAfter clean
