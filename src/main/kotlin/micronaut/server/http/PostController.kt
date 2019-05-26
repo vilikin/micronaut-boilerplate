@@ -7,8 +7,9 @@ import io.reactivex.Single
 import micronaut.server.integrations.PlaceholderClient
 import micronaut.server.integrations.PostWithComments
 
+// Example controller to demonstrate reactive HttpClient usage
 @Controller("\${custom.server.base-path:}/posts")
-class Controller(
+class PostController(
   private val placeholderClient: PlaceholderClient
 ) {
   @Get

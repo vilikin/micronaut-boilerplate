@@ -2,6 +2,24 @@ micronaut:
   server:
     port: 8080
 
+postgres:
+  reactive:
+    client:
+      port: 9432
+      host: localhost
+      database: postgres
+      user: postgres
+      password: postgres
+
+flyway:
+  datasources:
+    default:
+      url: jdbc:postgresql://localhost:9432/test
+      username: postgres
+      password: postgres
+      clean-schema: true
+      locations: classpath:migrations
+
 custom:
   server:
     secret: secret
