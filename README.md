@@ -1,6 +1,6 @@
 # Micronaut Boilerplate
 
-Simple microservice demonstrating how to set up simple reactive API, reactive HTTP client, Swagger and basic configuration utilising Micronaut framework.
+Simple microservice demonstrating how to set up simple reactive API, reactive HTTP client, reactive Postgres client, Swagger and basic configuration utilising Micronaut framework.
 
 ## Running service
 
